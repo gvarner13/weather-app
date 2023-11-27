@@ -52,7 +52,8 @@ export default {
 		let html = `
       <!DOCTYPE html>
       <head>
-        <title>Geolocation: Weather</title>
+        <title>Weather</title>
+		<link rel="icon" href="https://fav.farm/%F0%9F%8C%A6" />
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <body class="bg-slate-900">
