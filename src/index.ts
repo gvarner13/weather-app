@@ -25,8 +25,71 @@ export interface Env {
 	// MY_QUEUE: Queue;
 }
 
-export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+interface ApiResponse {
+	data: {
+		aqi: number;
+		idx: number;
+		attributions: {
+			url: string;
+			name: string;
+			logo: string;
+		}[];
+		city: {
+			geo: number[];
+			name: string;
+			url: string;
+		};
+		dominentpol: string;
+		iaqi: {
+			co?: {
+				v: number;
+			};
+			h?: {
+				v: number;
+			};
+			no2?: {
+				v: number;
+			};
+			o3?: {
+				v: number;
+			};
+			p?: {
+				v: number;
+			};
+			pm10?: {
+				v: number;
+			};
+			pm25?: {
+				v: number;
+			};
+			so2?: {
+				v: number;
+			};
+			t?: {
+				v: number;
+			};
+			w?: {
+				v: number;
+			};
+		};
+		time: {
+			s: string;
+			tz: string;
+			v: number;
+		};
+	};
+}
+
+function displayValueOrMessage(value: number | undefined, label: string) {
+	if (value === undefined) {
+		return `<p>${label}: Data not available.</p>`;
+	} else {
+		return `<p>${label}: ${value}.</p>`;
+	}
+}
+
+const handler: ExportedHandler<Env> = {
+	async fetch(request, env) {
 		let endpoint = 'https://api.waqi.info/feed/geo:';
 		const token = env.weather_token; //Use a token from https://aqicn.org/api/
 
@@ -40,14 +103,34 @@ export default {
 		};
 
 		const response = await fetch(endpoint, init);
-		const content = await response.json();
+		const content = await response.json() as ApiResponse;
+
+		const country = request.cf?.country;
+		let temperatureUnit = '°C';
 
 		let html_content = `<p>You are located at: ${latitude},${longitude}.</p>`;
 		html_content += `<p>Based off sensor data from <a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a>:</p>`;
-		html_content += `<p>The AQI level is: ${content.data.aqi}.</p>`;
-		html_content += `<p>The N02 level is: ${content.data.iaqi.no2?.v}.</p>`;
-		html_content += `<p>The O3 level is: ${content.data.iaqi.o3?.v}.</p>`;
-		html_content += `<p>The temperature is: ${content.data.iaqi.t?.v}°C.</p>`;
+		html_content += displayValueOrMessage(content.data.aqi, "The AQI level");
+		html_content += displayValueOrMessage(content.data.iaqi.no2?.v, "The NO2 level");
+		html_content += displayValueOrMessage(content.data.iaqi.o3?.v, "The O3 level");
+
+		let temperatureMessage;
+		if (content.data.iaqi.t?.v === undefined) {
+			temperatureMessage = `<p>The temperature: Data not available.</p>`;
+		} else {
+			let temperature = content.data.iaqi.t.v;
+			if (country === 'US' || country === 'BS' || country === 'KY' || country === 'PW') {
+				temperature = temperature * 9 / 5 + 32;
+				temperatureUnit = '°F';
+			}
+			const formattedTemperature = new Intl.NumberFormat('en-US', {
+				style: 'decimal',
+				maximumFractionDigits: 1
+			}).format(temperature);
+			temperatureMessage = `<p>The temperature is: ${formattedTemperature}${temperatureUnit}.</p>`;
+		}
+
+		html_content += temperatureMessage;
 
 		let html = `
       <!DOCTYPE html>
@@ -74,3 +157,5 @@ export default {
 		});
 	},
 };
+
+export default handler;
