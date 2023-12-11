@@ -57,7 +57,7 @@ export default {
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <body class="bg-slate-900">
-        <main class="flex h-screen flex-col items-center w-[400px] m-auto">
+        <main class="flex  flex-col items-center w-[400px] m-auto">
           <div id="container" class="mt-6 p-6">
             <h1 class="text-center text-9xl font-black" style="background: linear-gradient(to right, #E7FF52, #41FF54);-webkit-background-clip: text;-webkit-text-fill-color: transparent">Your Localish Weather</h1>
           </div>
@@ -65,6 +65,9 @@ export default {
           ${html_content}
           </div>
         </main>
+		<footer class="text-center">
+			<p class="pt-8 text-white">Made with ❤️ by <a href="https://twitter.com/GSVarner">Gary Varner</a></p>
+		</footer>
       </body>`;
 
 		return new Response(html, {
