@@ -1,0 +1,31 @@
+<main class="m-auto flex flex-col items-center">
+	<div id="container" class="mt-6 p-6">
+		<h1 class="text-center text-9xl font-black">
+			Your Local<span
+				style="background: linear-gradient(to right, #e7ff52, #41ff54); -webkit-background-clip: text; -webkit-text-fill-color: transparent"
+				>ish</span
+			>
+			Weather
+		</h1>
+	</div>
+	<div class="grid w-[800px] auto-cols-min auto-rows-[192px] grid-cols-3 gap-4">
+		<div class="row-span-1 flex items-center rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="text-4xl font-bold">34.10780, -84.50260</div>
+		</div>
+		<div class="row-span-1 flex items-end justify-end rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="p-2">
+				<div class="text-7xl font-bold">13</div>
+				<div class="text-right text-2xl font-medium">AQI</div>
+			</div>
+		</div>
+		<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">N02 Level</div>
+		<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">
+			<a class="underline decoration-lime-400" href="https://aqicn.org/city/georgia/united-ave.">United Ave., Georgia, USA</a>
+		</div>
+		<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">8.8°C</div>
+		<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">O3 Level</div>
+	</div>
+</main>
+<footer class="text-center">
+	<p class="pt-8 text-black">Made with ❤️ by <a href="https://twitter.com/GSVarner">Gary Varner</a></p>
+</footer>

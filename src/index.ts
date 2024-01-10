@@ -19,7 +19,9 @@ export default {
 		const response = await fetch(endpoint, init);
 		const content: object = await response.json();
 
-		let html_content = `<p>You are located at: ${latitude},${longitude}.</p>`;
+		let html_content = `<div class="row-span-1 flex items-center rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="text-4xl font-bold">${latitude}, ${longitude}</div>
+		</div>`;
 		html_content += `<p>Based off sensor data from <a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a>:</p>`;
 		html_content += `<p>The AQI level is: ${content.data.aqi}</p>`;
 		html_content += `<p>The N02 level is: ${content.data.iaqi.no2?.v}</p>`;
@@ -33,17 +35,23 @@ export default {
 		<link rel="icon" href="https://fav.farm/%F0%9F%8C%A6" />
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <body class="bg-slate-700">
-        <main class="flex  flex-col items-center w-[400px] m-auto">
+      <body>
+        <main class="flex flex-col items-center w-[400px] m-auto">
           <div id="container" class="mt-6 p-6">
-            <h1 class="text-center text-9xl font-black" style="background: linear-gradient(to right, #E7FF52, #41FF54);-webkit-background-clip: text;-webkit-text-fill-color: transparent">Your Localish Weather</h1>
+		  	<h1 class="text-center text-9xl font-black">
+		  		Your Local<span
+			  		style="background: linear-gradient(to right, #e7ff52, #41ff54); -webkit-background-clip: text; -webkit-text-fill-color: transparent"
+			  	>ish</span
+		  		>
+		  		Weather
+	  		</h1>
           </div>
           <div class="text-white rounded-md border-lime-400 border p-6 bg-slate-800">
           ${html_content}
           </div>
         </main>
 		<footer class="text-center">
-			<p class="pt-8 text-white">Made with ❤️ by <a href="https://twitter.com/GSVarner">Gary Varner</a></p>
+			<p class="pt-8 text-black">Made with ❤️ by <a href="https://twitter.com/GSVarner">Gary Varner</a></p>
 		</footer>
       </body>`;
 
