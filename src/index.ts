@@ -22,11 +22,18 @@ export default {
 		let html_content = `<div class="row-span-1 flex items-center rounded-xl border-2 bg-neutral-100 p-4">
 			<div class="text-4xl font-bold">${latitude}, ${longitude}</div>
 		</div>`;
-		html_content += `<p>Based off sensor data from <a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a>:</p>`;
-		html_content += `<p>The AQI level is: ${content.data.aqi}</p>`;
-		html_content += `<p>The N02 level is: ${content.data.iaqi.no2?.v}</p>`;
-		html_content += `<p>The O3 level is: ${content.data.iaqi.o3?.v}</p>`;
-		html_content += `<p>The temperature is: ${content.data.iaqi.t?.v}°C</p>`;
+		html_content += `<div class="row-span-1 flex items-end justify-end rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="p-2">
+				<div class="text-7xl font-bold">${content.data.aqi}</div>
+				<div class="text-right text-2xl font-medium">AQI</div>
+			</div>
+		</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">
+			<a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a>
+		</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4"> ${content.data.iaqi.no2?.v}</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.t?.v}°C</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.o3?.v}</div>`;
 
 		let html = `
       <!DOCTYPE html>
@@ -36,7 +43,7 @@ export default {
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <body>
-        <main class="flex flex-col items-center w-[400px] m-auto">
+        <main class="flex flex-col items-center m-auto">
           <div id="container" class="mt-6 p-6">
 		  	<h1 class="text-center text-9xl font-black">
 		  		Your Local<span
@@ -46,7 +53,7 @@ export default {
 		  		Weather
 	  		</h1>
           </div>
-          <div class="text-white rounded-md border-lime-400 border p-6 bg-slate-800">
+          <div class="grid w-[800px] auto-cols-min auto-rows-[192px] grid-cols-3 gap-4">
           ${html_content}
           </div>
         </main>
