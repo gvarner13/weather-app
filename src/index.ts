@@ -21,15 +21,22 @@ export default {
 
 		let html_content = `<div class="row-span-1 flex items-center rounded-xl border-2 bg-neutral-100 p-4">
 			<div class="text-4xl font-bold">${latitude}, ${longitude}</div>
+			<div><a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a></div>
+		</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">
+			<h1 class="text-center text-9xl font-black">
+				Your Local<span
+					style="background: linear-gradient(to right, #e7ff52, #41ff54); -webkit-background-clip: text; -webkit-text-fill-color: transparent"
+				>ish</span
+				>
+				Weather
+			</h1>
 		</div>`;
 		html_content += `<div class="row-span-1 flex items-end justify-end rounded-xl border-2 bg-neutral-100 p-4">
 			<div class="p-2">
 				<div class="text-7xl font-bold">${content.data.aqi}</div>
 				<div class="text-right text-2xl font-medium">AQI</div>
 			</div>
-		</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">
-			<a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a>
 		</div>`;
 		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4"> ${content.data.iaqi.no2?.v}</div>`;
 		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.t?.v}°C</div>`;
@@ -42,18 +49,9 @@ export default {
 		<link rel="icon" href="https://fav.farm/%F0%9F%8C%A6" />
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <body>
-        <main class="flex flex-col items-center m-auto">
-          <div id="container" class="mt-6 p-6">
-		  	<h1 class="text-center text-9xl font-black">
-		  		Your Local<span
-			  		style="background: linear-gradient(to right, #e7ff52, #41ff54); -webkit-background-clip: text; -webkit-text-fill-color: transparent"
-			  	>ish</span
-		  		>
-		  		Weather
-	  		</h1>
-          </div>
-          <div class="grid w-[800px] auto-cols-min auto-rows-[192px] grid-cols-3 gap-4">
+      <body class="min-h-screen">
+        <main class="flex justify-center m-auto">
+          <div class="grid w-[800px] auto-cols-min auto-rows-[192px] grid-cols-3 gap-4 mt-6">
           ${html_content}
           </div>
         </main>
