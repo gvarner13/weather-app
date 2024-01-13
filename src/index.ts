@@ -19,12 +19,12 @@ export default {
 		const response = await fetch(endpoint, init);
 		const content: object = await response.json();
 
-		let html_content = `<div class="row-span-1 flex items-center rounded-xl border-2 bg-neutral-100 p-4">
+		let html_content = `<div class="row-span-1 flex flex-col items-center rounded-xl border-2 bg-neutral-100 p-4">
 			<div class="text-4xl font-bold">${latitude}, ${longitude}</div>
 			<div><a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a></div>
 		</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">
-			<h1 class="text-center text-9xl font-black">
+		html_content += `<div>
+			<h1 class="text-center text-6xl font-black">
 				Your Local<span
 					style="background: linear-gradient(to right, #e7ff52, #41ff54); -webkit-background-clip: text; -webkit-text-fill-color: transparent"
 				>ish</span
