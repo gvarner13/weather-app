@@ -38,9 +38,9 @@ export default {
 				<div class="text-right text-2xl font-medium">AQI</div>
 			</div>
 		</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4"> ${content.data.iaqi.no2?.v}</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4"> ${content.data.iaqi.no2?.v || 0}</div>`;
 		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.t?.v}°C</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.o3?.v}</div>`;
+		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.o3?.v || 0}</div>`;
 
 		let html = `
       <!DOCTYPE html>
