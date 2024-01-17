@@ -19,9 +19,9 @@ export default {
 		const response = await fetch(endpoint, init);
 		const content: object = await response.json();
 
-		let html_content = `<div class="row-span-1 flex flex-col items-center rounded-xl border-2 bg-neutral-100 p-4">
-			<div class="text-4xl font-bold">${latitude}, ${longitude}</div>
-			<div><a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a></div>
+		let html_content = `<div class="row-span-1 flex flex-col justify-center rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="text-center text-4xl font-bold">${latitude}, ${longitude}</div>
+			<div class="text-center"><a class="underline decoration-lime-400" href="${content.data.city.url}">${content.data.city.name}</a></div>
 		</div>`;
 		html_content += `<div>
 			<h1 class="text-center text-6xl font-black">
@@ -32,15 +32,27 @@ export default {
 				Weather
 			</h1>
 		</div>`;
-		html_content += `<div class="row-span-1 flex items-end justify-end rounded-xl border-2 bg-neutral-100 p-4">
+		html_content += `<div class="row-span-1 flex items-center justify-center rounded-xl border-2 bg-neutral-100 p-4">
 			<div class="p-2">
-				<div class="text-7xl font-bold">${content.data.aqi}</div>
-				<div class="text-right text-2xl font-medium">AQI</div>
+				<div class="text-center text-7xl font-bold">${content.data.aqi}</div>
+				<div class="text-center text-2xl font-medium">AQI</div>
 			</div>
 		</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4"> ${content.data.iaqi.no2?.v || 0}</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.t?.v}°C</div>`;
-		html_content += `<div class="row-span-1 rounded-xl border-2 bg-neutral-100 p-4">${content.data.iaqi.o3?.v || 0}</div>`;
+		html_content += `<div class="row-span-1 flex items-center justify-center rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="p-2">
+        		<div class="text-center text-7xl font-bold">${content.data.iaqi.no2?.v || 0}</div>
+        		<div class="text-center">N02 Levels</div>
+      		</div>
+		</div>`;
+		html_content += `<div class="row-span-1 flex items-center justify-center rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="p-2 text-7xl font-bold">${content.data.iaqi.t?.v}°<span class="text-3xl">C</span></div>
+		</div>`;
+		html_content += `<div class="row-span-1 flex items-center justify-center rounded-xl border-2 bg-neutral-100 p-4">
+			<div class="p-2">
+        		<div class="text-center text-7xl font-bold">${content.data.iaqi.o3?.v || 0}</div>
+        		<div class="text-center">03 Levels</div>
+      		</div>
+		</div>`;
 
 		let html = `
       <!DOCTYPE html>
